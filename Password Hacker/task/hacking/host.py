@@ -9,9 +9,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         while True:
             data = conn.recv(1024)
-            if data and data.decode('utf-8') != 'qwerty':
-                conn.send(b"Wrong password!")
+            if data and data.decode('utf-8') == 'd1':
+                conn.send(b"Connection success!")
             elif data:
-                conn.send(b"Connection Success!")
-            elif not data:
-                break
+                conn.send(b"Wrong password!")

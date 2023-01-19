@@ -73,7 +73,7 @@ files:
                 self.sock.listen(1)
                 conn, addr = self.sock.accept()
                 self.connected = True
-                conn.settimeout(15)
+                conn.settimeout(16)
                 while True:
                     data = conn.recv(1024)
                     self.message.append(data.decode('utf8'))
@@ -137,6 +137,30 @@ files:
         test.run_tests()
         test.stop_server()
   learner_created: false
+- name: hacking/host.py
+  visible: true
+  text: |-
+    import socket
+
+    HOST = '127.0.0.1'
+    PORT = 9090
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((HOST, PORT))
+        s.listen(1)
+        conn, addr = s.accept()
+        with conn:
+            while True:
+                data = conn.recv(1024)
+                if data and data.decode('utf-8') != 'qwerty':
+                    conn.send(b"Wrong password!")
+                elif data:
+                    conn.send(b"Connection Success!")
+                elif not data:
+                    break
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7217#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 18 Jan 2023 21:38:31 UTC"
 record: -1

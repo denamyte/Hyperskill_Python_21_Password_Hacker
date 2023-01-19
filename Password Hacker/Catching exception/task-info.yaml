@@ -84,7 +84,7 @@ files:
                 self.sock.listen(1)
                 conn, addr = self.sock.accept()
                 self.connected = True
-                conn.settimeout(15)
+                conn.settimeout(16)
                 while True:
                     data = conn.recv(1024)
                     self.message.append(data.decode('utf8'))
