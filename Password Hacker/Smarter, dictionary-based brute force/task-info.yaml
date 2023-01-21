@@ -146,7 +146,13 @@ files:
         test.run_tests()
         test.stop_server()
   learner_created: false
-- name: hacking/host.py
+- name: ./passwords.txt
+  visible: true
+  learner_created: true
+- name: ./logins.txt
+  visible: true
+  learner_created: true
+- name: ./host.py
   visible: true
   text: |
     import socket
@@ -165,12 +171,9 @@ files:
                 elif data:
                     conn.send(b"Wrong password!")
   learner_created: true
-- name: ./passwords.txt
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7218#comment
 status: Solved
 feedback:
   message: Congratulations!
   time: "Fri, 20 Jan 2023 01:01:50 UTC"
-record: -1
+record: 3
