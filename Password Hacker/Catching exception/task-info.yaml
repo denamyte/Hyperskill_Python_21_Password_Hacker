@@ -215,9 +215,6 @@ files:
         test.run_tests()
         test.stop_server()
   learner_created: false
-- name: ./host.py
-  visible: true
-  learner_created: true
 - name: ./logins.txt
   visible: true
   text: |
@@ -252,4 +249,4 @@ status: Solved
 feedback:
   message: Congratulations!
   time: "Sat, 21 Jan 2023 01:59:38 UTC"
-record: -1
+record: 4

